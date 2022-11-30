@@ -8,10 +8,10 @@
   <th>R2</th>
 </tr>
 <tr>
-  <td><img src="assets/devices_c1.png"></td>
-  <td><img src="assets/devices_m.png"></td>
-  <td><img src="assets/devices_c2.png"></td>
-  <td><img src="assets/devices_r2.png"></td>  
+  <td bgcolor="#ffffff"><img src="assets/devices_c1.png"></td>
+  <td bgcolor="#ffffff"><img src="assets/devices_m.png"></td>
+  <td bgcolor="#ffffff"><img src="assets/devices_c2.png"></td>
+  <td bgcolor="#ffffff"><img src="assets/devices_r2.png"></td>
 </tr>
 <tr>
   <th colspan=4>Supported Firmwares</th>
@@ -27,3 +27,4 @@
 ## Supported Device Firmwares
 
 The Latch SDK works with the most recent versions of the Latch devices. To upgrade your device to the latest firmware, please see instructions [here](https://support.latch.com/hc/en-us/articles/360011557853-Firmware-Upgrades).
+
