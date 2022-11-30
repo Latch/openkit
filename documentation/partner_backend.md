@@ -74,9 +74,7 @@ To obtain a token from the Latch Auth0 App, the following steps need to be execu
 	HTTP Request Headers
 
 	```
-	{
-	"auth0-forwarded-for": "{{user_ip}}",
-	}
+	auth0-forwarded-for: {{user_ip}}
 	```
 
 	HTTP Request Body
