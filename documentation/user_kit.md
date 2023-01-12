@@ -79,7 +79,14 @@ Partners can fetch a list of their Users. This will be done by using a partner-s
 1. GET users request from the Partner BE to the Latch BE
 
 	```
-	GET https://rest.latchaccess.com/access/sdk/v1/users
+	GET https://rest.latchaccess.com/access/sdk/v1/users?pageSize=<PAGE_SIZE>&pageToken=<PAGE_TOKEN>
+	```
+
+	HTTP Query Parameters
+
+	```
+	pageSize: <integer> (default is 100)
+	pageToken: "<string>" (default is "0", first page)
 	```
 
 	HTTP Headers
@@ -104,10 +111,25 @@ Partners can fetch a list of their Users. This will be done by using a partner-s
 	        "firstName": "<string>",
 	        "lastName": "<string>",
 	        "userUuid": "<string>"
-	      },
-	      ...
-	    ]
-	}
+	        "accesses": [
+              {
+                "doorUuid": "<string>",
+                "passcodeType": "<string>",
+                "shareable": <boolean>,
+                "startTime": "<string>",
+                "endTime": "<string>",
+                "granter": {
+                  "type": "<string>",
+                  "uuid": "<string>",
+                }
+              },
+              ...
+            ]
+          },
+          ...
+        ],
+        "nextPageToken": "<string>"
+    }
 	```
 	
 1. If the request was successful, the Partner BE will receive an HTTP 200 containing a list of User objects, with the following fields:
