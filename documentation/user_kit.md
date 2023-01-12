@@ -79,7 +79,7 @@ Partners can fetch a list of their Users. This will be done by using a partner-s
 1. GET users request from the Partner BE to the Latch BE
 
 	```
-	GET https://rest.latchaccess.com/access/sdk/v1/users?pageSize=<PAGE_SIZE>&pageToken=<PAGE_TOKEN>
+	GET https://rest.latchaccess.com/access/sdk/v1/users
 	```
 
 	HTTP Query Parameters
