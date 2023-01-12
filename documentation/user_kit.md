@@ -82,6 +82,13 @@ Partners can fetch a list of their Users. This will be done by using a partner-s
 	GET https://rest.latchaccess.com/access/sdk/v1/users
 	```
 
+	HTTP Query Parameters
+
+	```
+	pageSize: <integer> (default is 100)
+	pageToken: "<string>" (default is "0", first page)
+	```
+
 	HTTP Headers
 	
 	```
@@ -104,9 +111,24 @@ Partners can fetch a list of their Users. This will be done by using a partner-s
 	        "firstName": "<string>",
 	        "lastName": "<string>",
 	        "userUuid": "<string>"
+	        "accesses": [
+	          {
+	            "doorUuid": "<string>",
+	            "passcodeType": "<string>",
+	            "shareable": <boolean>,
+	            "startTime": "<string>",
+	            "endTime": "<string>",
+	            "granter": {
+	              "type": "<string>",
+	              "uuid": "<string>",
+	            } 
+	          },
+	          ...
+	        ]
 	      },
 	      ...
-	    ]
+	    ],
+	    "nextPageToken": "<string>"
 	}
 	```
 	
