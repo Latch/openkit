@@ -78,54 +78,76 @@ Partners can fetch a list of their Users. This will be done by using a partner-s
 
 1. GET users request from the Partner BE to the Latch BE
 
-	```
-	GET https://rest.latchaccess.com/access/sdk/v1/users
-	```
+    ```
+    GET https://rest.latchaccess.com/access/sdk/v1/users?pageSize=<PAGE_SIZE>&pageToken=<PAGE_TOKEN>
+    ```
+   
+    Query Parameters
 
-	HTTP Headers
+    ```
+    pageSize: <integer> (default is 100)
+    pageToken: "<string>" (default is "0", first page)
+    ```
+
+    HTTP Headers
 	
-	```
-	Authorization: Bearer {{access_token}}
-	```
+    ```
+    Authorization: Bearer {{access_token}}
+    ```
 
-	HTTP Request Body
+    HTTP Request Body
 	
-	```
-	<empty>
-	```
+    ```
+    <empty>
+    ```
 
-	HTTP Response Body
+    HTTP Response Body
 	
-	```
-	{
-	    "users": [
-	      {
-	        "email": "<string>",
-	        "firstName": "<string>",
-	        "lastName": "<string>",
-	        "userUuid": "<string>"
-	      },
-	      ...
-	    ]
-	}
-	```
+    ```
+    {
+        "users": [
+          {
+            "email": "<string>",
+            "firstName": "<string>",
+            "lastName": "<string>",
+            "userUuid": "<string>",
+            "accesses": [
+              {
+                "doorUuid": "<string>",
+                "passcodeType": "<string>",
+                "shareable": <boolean>,
+                "startTime": "<string>",
+                "endTime": "<string>",
+                "granter": {
+                  "type": "<string>",
+                  "uuid": "<string>",
+                }
+              },
+              ...
+            ]
+          },
+          ...
+        ],
+        "nextPageToken": "<string>"
+    }
+    ```
+
+1. If the request was successful, the Partner BE will receive an HTTP 200 with the following fields:
+
+    * `email`: Email address associated with the user.
+    * `firstName`: First name of the user.
+    * `lastName`: Last name of the user.
+    * `userUuid`: Unique identifier of the user.
+
+    In case of an error, the API will return the following error responses:
 	
-1. If the request was successful, the Partner BE will receive an HTTP 200 containing a list of User objects, with the following fields:
+    * `401 Unauthorized`: missing or invalid access token.
 
-	* `email`: Email address associated with the user.
-	* `firstName`: First name of the user.
-	* `lastName`: Last name of the user.
-	* `userUuid`: Unique identifier of the user.
-
-	In case of an error, the API will return the following error responses:
-	
-	* `401 Unauthorized`: missing or invalid access token.
-
-		⇒ Check the token hasn't expired and refresh the token if needed.
+        ⇒ Check the token hasn't expired and refresh the token if needed.
 		
-	* `500 Internal Server Error`: there was an unexpected error.
+    * `500 Internal Server Error`: there was an unexpected error.
 
-		⇒ Contact Latch Support
+        ⇒ Contact Latch Support
 
 ### Create users and grant access
 
@@ -134,7 +156,7 @@ Partners can invite users, without the need of creating them ahead of time, and 
 1. POST from the Partner BE to the Latch BE with the user and door information
 
 	```
-	POST https://rest.latchaccess.com/access/sdk/v1/users
+	POST https://rest.latchaccess.com/access/sdk/v1/users?pageSize=<PAGE_SIZE>&pageToken=<PAGE_TOKEN>
 	```
 
 	HTTP Headers
