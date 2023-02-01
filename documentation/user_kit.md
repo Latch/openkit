@@ -266,7 +266,7 @@ Partners can revoke user access to given doors. This will be done by using a par
 
 Partners can fetch a single user. This will be done by using a partner-scoped token from the BE.
 
-1. GET user request from the Partner BE to the Latch BE
+1. GET user request from the Partner BE to the Latch BE with a valid user uuid.
 
     ```
     GET https://rest.latchaccess.com/access/sdk/v1/users/:user
@@ -309,7 +309,7 @@ Partners can fetch a single user. This will be done by using a partner-scoped to
     }
     ```
 	
-3. If the request was successful, the Partner BE will receive an HTTP 200 containing a User object, with the following fields:
+2. If the request was successful, the Partner BE will receive an HTTP 200 containing a User object, with the following fields:
 
     * `email`: Email address associated with the user.
     * `firstName`: First name of the user.
