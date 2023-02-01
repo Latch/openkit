@@ -309,7 +309,7 @@ Partners can fetch a single user. This will be done by using a partner-scoped to
     }
     ```
 	
-2. If the request was successful, the Partner BE will receive an HTTP 200 containing a User object, with the following fields:
+1. If the request was successful, the Partner BE will receive an HTTP 200 containing a User object, with the following fields:
 
     * `email`: Email address associated with the user.
     * `firstName`: First name of the user.
