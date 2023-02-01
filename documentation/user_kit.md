@@ -138,6 +138,7 @@ Partners can fetch a list of their Users. This will be done by using a partner-s
 	* `firstName`: First name of the user.
 	* `lastName`: Last name of the user.
 	* `userUuid`: Unique identifier of the user.
+	* `accesses`: List of doors the user has access to.
 
 	In case of an error, the API will return the following error responses:
 	
@@ -256,6 +257,75 @@ Partners can revoke user access to given doors. This will be done by using a par
     * `401 Unauthorized`: missing or invalid access token.
 
         ⇒ Check the token hasn't expired and refresh the token if needed.
+		
+    * `500 Internal Server Error`: there was an unexpected error.
+
+        ⇒ Contact Latch Support
+
+### Get user
+
+Partners can fetch a single user. This will be done by using a partner-scoped token from the BE.
+
+1. GET user request from the Partner BE to the Latch BE
+
+    ```
+    GET https://rest.latchaccess.com/access/sdk/v1/users/:user
+    ```
+
+    HTTP Headers
+	
+    ```
+    Authorization: Bearer {{access_token}}
+    ```
+
+    HTTP Request Body
+	
+    ```
+    <empty>
+    ```
+
+    HTTP Response Body
+
+    ```
+    {
+       "email": "<string>",
+       "firstName": "<string>",
+       "lastName": "<string>",
+       "userUuid": "<string>",,
+       "accesses": [
+         {
+           "doorUuid: "<string>",
+           "passcodeType": "<string>",
+           "shareable": <boolean>,
+           "startTime": "<string>",
+           "endTime": "<string>",
+           "granter": {
+             "type": "<string>",
+             "uuid": "<string>",
+           }
+         },
+         ...
+       ]
+    }
+    ```
+	
+3. If the request was successful, the Partner BE will receive an HTTP 200 containing a User object, with the following fields:
+
+    * `email`: Email address associated with the user.
+    * `firstName`: First name of the user.
+    * `lastName`: Last name of the user.
+    * `userUuid`: Unique identifier of the user.
+    * `accesses`: List of doors the user has access to.
+
+    In case of an error, the API will return the following error responses:
+	
+    * `401 Unauthorized`: missing or invalid access token.
+
+        ⇒ Check the token hasn't expired and refresh the token if needed.
+
+    * `404 Not Found`: invalid user.
+	
+        ⇒ Check the user identifier.
 		
     * `500 Internal Server Error`: there was an unexpected error.
 
