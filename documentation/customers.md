@@ -20,14 +20,13 @@ When implementing the Latch Unlock Kit and User Kit, Partners work together with
 | Customer | Partner | Latch |
 | -------- | ------- | ----- |
 | Manage Physical Devices | Build client and server integration with Latch | Provide access to APIs, SDKs and documentation |
-| Setup Doors and Keys | User Authentication | Partner Authentication (Static IP Restricted) |
-| Assign Doors/Keys to Partners | User Management | Partner / User Authorization |
-| | JWT Token retrieval from Latch BE | JWT Token Provider |
-| | Host App for Latch SDK | Native IOS/Android SDKs |
-| | Renew JWT Token | Secure SDK storage and communication |
-| | Provide a great UI/UX | Provide and Cache Device Credentials |
-| | Gather Bluetooth Permissions | Encapsulate all BLE Interactivity |
-| | Static IPs | Provide a list of Doors and Devices to App |
+| Setup Doors and Keys | User Authentication | Partner / User Authorization |
+| Assign Doors/Keys to Partners | User Management | JWT Token Provider |
+| | JWT Token retrieval from Latch BE | Native IOS/Android SDKs |
+| | Host App for Latch SDK | Secure SDK storage and communication |
+| | Renew JWT Token | Provide and Cache Device Credentials |
+| | Provide a great UI/UX | Encapsulate all BLE Interactivity |
+| | Gather Bluetooth Permissions | Provide a list of Doors and Devices to App |
 | | | Gather User Consent |
 | | | Traffic Monitoring |
 
