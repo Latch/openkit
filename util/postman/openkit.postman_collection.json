@@ -119,7 +119,7 @@
 					"response": []
 				},
 				{
-					"name": "refresh token",
+					"name": "passwordless refresh token",
 					"event": [
 						{
 							"listen": "test",
