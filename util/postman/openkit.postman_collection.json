@@ -322,6 +322,31 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{openkit_url}}/v1/users/{{param_user_uuid}}",
+							"host": [
+								"{{openkit_url}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								"{{param_user_uuid}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
