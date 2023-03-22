@@ -117,7 +117,7 @@ To obtain a token from the Latch Auth0 App, the following steps need to be execu
 		
 		* `error="extensibility_error" error_description="USER_ACCOUNT_NOT_ACTIVE"`: Email account exists, but is not active.
 
-		⇒ Contact Latch Support to check the status of the user account.
+			⇒ Contact Latch Support to check the status of the user account.
 
 	* HTTP 403
 		* `error="unauthorized_client"`: missing or invalid credentials. 
