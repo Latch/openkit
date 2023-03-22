@@ -1,13 +1,6 @@
 # Partner Backend
 
-Latch will provide Partners with a unique [Auth0 app](https://auth0.com/docs/get-started/applications) that will only be accessible to the Partner’s BE through whitelisted IP addresses. 
-
-## IP Allowlist
-
-Each Partner will be expected to provide a set of **static** IPs that will be added to our allowlist by Latch’s Auth system. Requests for authorization tokens for the Partner not originating from the whitelisted IPs will be rejected with an HTTP status code 403.
-
-Partners are expected to provide IP addresses for Production and Staging environments to Latch manually (email, for ex). Lower-level environments will be granted on a case-by-case basis and only for a limited amount of time.
-
+Latch will provide Partners with a unique [Auth0 app](https://auth0.com/docs/get-started/applications).
 
 ## Client Id and Client Secret
 
