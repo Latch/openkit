@@ -104,23 +104,30 @@ To obtain a token from the Latch Auth0 App, the following steps need to be execu
 	* `email_verified`: Unused field.
 	* `_id`: Unused field.
 
-	In case of an error, the API will return an HTTP 400 and a status in the "error_description" field:
+	In case of an error, the API will return the following HTTP error codes and detailed information in the `error_description` field:
 	
-	* `BAD_REQUEST`: Missing "email" parameter.
+	* HTTP 400
+		* `error="bad.email"`: Missing "email" parameter.
 	
-		⇒ Check the API request to make sure all fields have been populated.
+			⇒ Check the API request to make sure all fields have been populated.
 		
-	* `UNAUTHORIZED`: Email account is not authorized or doesn't exist.
+		* `error="extensibility_error" error_description="UNAUTHORIZED"`: Email account is not authorized or doesn't exist.
 
-		⇒ Check if the email has been configured in Manager Web.
+			⇒ Check if the email has been configured in Manager Web.
 		
-	* `USER_ACCOUNT_NOT_ACTIVE`: Email account exists, but is not active.
+		* `error="extensibility_error" error_description="USER_ACCOUNT_NOT_ACTIVE"`: Email account exists, but is not active.
 
 		⇒ Contact Latch Support to check the status of the user account.
 
-	* `INTERNAL_SERVER_ERROR`: There was an unexpected error.
+	* HTTP 403
+		* `error="unauthorized_client"`: missing or invalid credentials. 
 
-		⇒ Contact Latch Support to help debug this issue.
+			⇒ Check the request is using the correct value for `client_id` and `client_secret`.
+
+	* HTTP 500
+		* `error="internal_server_error"`: There was an unexpected error.
+
+			⇒ Contact Latch Support to help debug this issue.
 
 1. The Partner App will need to provide UI for the user to input the Verification Code from the user’s email.
 
@@ -168,27 +175,32 @@ To obtain a token from the Latch Auth0 App, the following steps need to be execu
 	* `scope`: List of scopes included in the token (same as the value provided in the HTTP request.
 	* `id_token`: Unused field.
 
-	In case of an error, the API will return an HTTP 500 and a status in the "error_description" field:
+	In case of an error, the API will return the following HTTP error codes and detailed information in the `error_description` field:
 
-	* `BAD_REQUEST`: Missing "email" parameter.
+	* HTTP 400
+		* `error="invalid_request"`: Missing or invalid parameter.
 
-		⇒ Check the API request to make sure all fields have been populated.
-		
-	* `UNAUTHORIZED_API`: Missing or invalid "audience" parameter.
+			⇒ Check the API request to make sure all fields have been populated. More details about the error in the `error_description` field.
 
-		⇒ Check the API request to make sure the "audience" field has the right value.
-	
-	* `UNAUTHORIZED`: Email account is not authorized or doesn't exist.
+	* HTTP 401
+		* `error="access_denied"`: missing or invalid credentials.
 
-		⇒ Check if the email has been configured in Manager Web.
+			⇒ Check the request is using the correct value for `client_id` and `client_secret`.
 
-	* `USER_ACCOUNT_NOT_ACTIVE`: Email account exists, but is not active.
+	* HTTP 403
+		* `"error": "invalid_grant"`: Missing or invalid grant parameters.
 
-		⇒ Contact Latch Support to check the status of the user account.
+			⇒ Check the API request to make sure the "username", "otp", "audience", and "scope" fields have the right values.
 
-	* `INTERNAL_SERVER_ERROR`: There was an unexpected error.
+		* `"error": "unauthorized_client"`: Missing or invalid grant type.
 
-		⇒ Contact Latch Support to help debug this issue.
+			⇒ Check the API request to make sure the "grant_type" field has the right value.
+
+	* HTTP 500
+		* `error="internal_server_error"`: There was an unexpected error.
+
+			⇒ Contact Latch Support to help debug this issue.
+
 
 ### Partner-scoped tokens
 
@@ -226,15 +238,22 @@ To obtain a token from the Latch Auth0 App, the following steps need to be execu
 	* `expires_in`: Time-to-live of the access token, in seconds. After this amount of time, the given access token will no longer be valid.
 	* `token_type`: Auth scheme to use (will always be "Bearer").
 
-	In case of an error, the API will return an HTTP 500 and a status in the "error_description" field:
+	In case of an error, the API will return the following error codes:
+
+	* HTTP 401
+		* `error="access_denied"`: missing or invalid credentials.
+
+			⇒ Check the request is using the correct value for `client_id` and `client_secret`.
 	
-	* `UNAUTHORIZED_API`: missing or invalid "audience" parameter.
+	* HTTP 403
+		* `error="access_denied"`: missing or invalid "audience" parameter.
 
 		⇒ Check the API request to make sure the "audience" field has the right value.
 
-	* `INTERNAL_SERVER_ERROR`: there was an unexpected error.
+	* HTTP 500
+		* `error="internal_server_error"`: there was an unexpected error.
 
-		⇒ Contact Latch Support to help debug this issue.
+			⇒ Contact Latch Support to help debug this issue.
 
 ## Token Expiration
 
@@ -300,19 +319,27 @@ The Refresh Token ensures the user does not have to be issued a Verification rep
 	* `scope`: List of scopes included in the token (same as the value provided in the HTTP request.
 	* `id_token`: Unused field.
 
-	In case of an error, the API will return an HTTP 500 and a status in the "error_description" field:
+	In case of an error, the API will return the following error codes:
 
-	* `BAD_REQUEST`: Missing "referesh_token" parameter.
+	* HTTP 401
+		* `error="access_denied"`: missing or invalid credentials.
 
-		⇒ Check the API request to make sure all fields have been populated.
+			⇒ Check the request is using the correct value for `client_id` and `client_secret`.
 
-	* `UNAUTHORIZED_API`: Missing or invalid "audience" parameter.
+	* HTTP 403
+		* `"error": "invalid_grant"`: Missing or invalid grant parameters.
 
-		⇒ Check the API request to make sure the "audience" field has the right value.
+			⇒ Check the API request to make sure the "refresh_token" field has the right value.
 
-	* `INTERNAL_SERVER_ERROR`: There was an unexpected error.
+		* `"error": "unauthorized_client"`: Grant type not allowed for the client.
 
-		⇒ Contact Latch Support to help debug this issue.
+			⇒ Check the API request to make sure the "grant_type" field has the right value.
+
+	* HTTP 500
+		* `error="internal_server_error"`: there was an unexpected error.
+
+			⇒ Contact Latch Support to help debug this issue.
+
 
 The Partner App will need to re-initialize the Latch SDK with the new Access Token.
 
