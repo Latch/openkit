@@ -4,7 +4,7 @@
 <tr><td><img src="assets/user_management_flow.png"></td></tr>
 </table>
 
-Customers will have access to the Latch Manager Web to create and manage users. To create a user, a Customer will need to provide a minimum of:
+Customers will have access to the Latch Mission Control to create and manage users. To create a user, a Customer will need to provide a minimum of:
 
 * First Name
 * Last Name
@@ -25,7 +25,7 @@ Creating a Latch account password and subsequently utilizing the Latch App is a 
 
 ## Keys
 
-Keys are a grouping of doors with settings that are provided to end users in order to provide access to a device and can be created for one or more doors from within the Latch Manager Web. When a Key is created, an authorized user from the Customer will also need to assign the Key to be accessible by a Partner.
+Keys are a grouping of doors with settings that are provided to end users in order to provide access to a device and can be created for one or more doors from within the Latch Mission Control. When a Key is created, an authorized user from the Customer will also need to assign the Key to be accessible by a Partner.
 
 ## Customer Setup
 
@@ -37,4 +37,4 @@ A Customer will need to set up doors, have them activated by an installer, creat
 
 > Keys can only be assigned to a single Partner, however Customers can create as many keys as needed. Until a Key is assigned to a Partner, the end user will be unable to unlock the associated Latch device through the Partner’s App.
 
-For an existing Portfolio Key, Latch Manager Web is unable to support changes at this time and requires the Customer to create a new Key. However since this is a well known issue, Latch Engineering teams are working to correct and will be addressed in a coming release. 
+For an existing Portfolio Key, Latch Mission Control is unable to support changes at this time and requires the Customer to create a new Key. However since this is a well known issue, Latch Engineering teams are working to correct and will be addressed in a coming release.

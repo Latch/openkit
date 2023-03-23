@@ -107,13 +107,13 @@ To obtain a token from the Latch Auth0 App, the following steps need to be execu
 	In case of an error, the API will return the following HTTP error codes and detailed information in the `error_description` field:
 	
 	* HTTP 400
-		* `error="bad.email"`: Missing "email" parameter.
+		* `error="bad.email"`: Missing `email` parameter.
 	
 			⇒ Check the API request to make sure all fields have been populated.
 		
 		* `error="extensibility_error" error_description="UNAUTHORIZED"`: Email account is not authorized or doesn't exist.
 
-			⇒ Check if the email has been configured in Manager Web.
+			⇒ Check if the email has been configured in Mission Control or programatically via User Kit API.
 		
 		* `error="extensibility_error" error_description="USER_ACCOUNT_NOT_ACTIVE"`: Email account exists, but is not active.
 
@@ -190,11 +190,11 @@ To obtain a token from the Latch Auth0 App, the following steps need to be execu
 	* HTTP 403
 		* `"error": "invalid_grant"`: Missing or invalid grant parameters.
 
-			⇒ Check the API request to make sure the "username", "otp", "audience", and "scope" fields have the right values.
+			⇒ Check the API request to make sure the `username`, `otp`, `audience`, and `scope` fields have the right values.
 
 		* `"error": "unauthorized_client"`: Missing or invalid grant type.
 
-			⇒ Check the API request to make sure the "grant_type" field has the right value.
+			⇒ Check the API request to make sure the `grant_type` field has the right value.
 
 	* HTTP 500
 		* `error="internal_server_error"`: There was an unexpected error.
@@ -240,15 +240,20 @@ To obtain a token from the Latch Auth0 App, the following steps need to be execu
 
 	In case of an error, the API will return the following error codes:
 
+	* HTTP 400
+		* `error="invalid_request"`: missing grant type.
+
+			⇒ Check the request includes the `grant_type` parameter.
+
 	* HTTP 401
 		* `error="access_denied"`: missing or invalid credentials.
 
 			⇒ Check the request is using the correct value for `client_id` and `client_secret`.
 	
 	* HTTP 403
-		* `error="access_denied"`: missing or invalid "audience" parameter.
+		* `error="access_denied"`: missing or invalid `audience` parameter.
 
-		⇒ Check the API request to make sure the "audience" field has the right value.
+		⇒ Check the API request to make sure the `audience` field has the right value.
 
 	* HTTP 500
 		* `error="internal_server_error"`: there was an unexpected error.
@@ -329,11 +334,11 @@ The Refresh Token ensures the user does not have to be issued a Verification rep
 	* HTTP 403
 		* `"error": "invalid_grant"`: Missing or invalid grant parameters.
 
-			⇒ Check the API request to make sure the "refresh_token" field has the right value.
+			⇒ Check the API request to make sure the `refresh_token` field has the right value.
 
 		* `"error": "unauthorized_client"`: Grant type not allowed for the client.
 
-			⇒ Check the API request to make sure the "grant_type" field has the right value.
+			⇒ Check the API request to make sure the `grant_type` field has the right value.
 
 	* HTTP 500
 		* `error="internal_server_error"`: there was an unexpected error.
