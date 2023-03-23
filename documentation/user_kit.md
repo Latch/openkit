@@ -1,10 +1,10 @@
 # User Kit
 
-User Kit allows partners to programmatically grant users access to doors without the need of doing this via Latch Manager Web.
+User Kit allows partners to programmatically grant users access to doors without the need of doing this via Latch Mission Control.
 
 ## Door Setup
 
-The first step is for the customer to select which "doors" (as presented in Latch Manager Web) can be eligible to be used programmatically by a given partner. 
+The first step is for the customer to select which "doors" (as presented in Latch Mission Control) can be eligible to be used programmatically by a given partner.
 
 After selecting a door, the property manager will select the partner from the dropdown, making it eligible for partners to use it via the APIs.
 
