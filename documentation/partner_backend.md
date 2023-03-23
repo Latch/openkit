@@ -113,7 +113,7 @@ To obtain a token from the Latch Auth0 App, the following steps need to be execu
 		
 		* `error="extensibility_error" error_description="UNAUTHORIZED"`: Email account is not authorized or doesn't exist.
 
-			⇒ Check if the email has been configured in Mission Control or programatically via User Kit API.
+			⇒ Check if the email has been configured in Mission Control or programmatically via User Kit API.
 		
 		* `error="extensibility_error" error_description="USER_ACCOUNT_NOT_ACTIVE"`: Email account exists, but is not active.
 
