@@ -241,7 +241,7 @@ To obtain a token from the Latch Auth0 App, the following steps need to be execu
 	In case of an error, the API will return the following error codes:
 
 	* HTTP 400
-		* `error="invalid_request"`: missing grant type.
+		* `error="invalid_request"`: missing required parameters.
 
 			⇒ Check the request includes the `grant_type` parameter.
 
@@ -325,6 +325,11 @@ The Refresh Token ensures the user does not have to be issued a Verification rep
 	* `id_token`: Unused field.
 
 	In case of an error, the API will return the following error codes:
+
+	* HTTP 400
+		* `error="invalid_request"`: missing required parameters.
+
+			⇒ Check the request includes both `grant_type` and `refresh_token` parameters.
 
 	* HTTP 401
 		* `error="access_denied"`: missing or invalid credentials.
