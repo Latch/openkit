@@ -253,7 +253,7 @@ To obtain a token from the Latch Auth0 App, the following steps need to be execu
 	* HTTP 403
 		* `error="access_denied"`: missing or invalid `audience` parameter.
 
-		⇒ Check the API request to make sure the `audience` field has the right value.
+			⇒ Check the API request to make sure the `audience` field has the right value.
 
 	* HTTP 500
 		* `error="internal_server_error"`: there was an unexpected error.
