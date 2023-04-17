@@ -121,7 +121,8 @@ Partners can fetch a list of their Users. This will be done by using a partner-s
 	            "granter": {
 	              "type": "<string>",
 	              "uuid": "<string>",
-	            } 
+	            },
+	            "role": "<string>" 
 	          },
 	          ...
 	        ]
@@ -173,6 +174,7 @@ Partners can invite users, without the need of creating them ahead of time, and 
 	    "firstName": "<string>",
 	    "lastName": "<string>",
 	    "email": "<string>",
+	    "phone": "<string>",
 	    "startTime": "<datetime>",  // e.g. "2022-09-30T15:11:02.537Z"
 	    "endTime": "<datetime>",    // e.g. "2022-09-30T15:11:02.537Z"
 	    "doorUuids": [
@@ -180,7 +182,7 @@ Partners can invite users, without the need of creating them ahead of time, and 
 	      ...
 	    ],
 	    "shareable": <boolean>,
-	    "passcodeType": "PERMANENT"
+	    "passcodeType": "PERMANENT" | "DAILY" | "DAILY_SINGLE_USE"
 	}
 	```
 	
@@ -198,6 +200,14 @@ Partners can invite users, without the need of creating them ahead of time, and 
 	}
 	```
 
+   Validation
+
+| Passcode Type    | Type of Credential | Credential Details                                                                                                                                                    | Validation Notes                                                                                                                                                                                                         | Downstream Notifications                                                                                 |
+|------------------|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| PERMANENT        | Mobile Access      | Access via Latch Consumer App or Partner App                                                                                                                          | Email Required, Phone Optional                                                                                                                                                                                           | Latch will send Guest a Latch Email Invite.                                                              |
+| DAILY            | Doorcode           | 7 digit doorcode that works for the entire calendar day set to the timezone of the device.End time from request is not used.                                          | Either email or phone required. Start time must be either on the day of the request or the next day. No start time further in advance will be allowed. Exact start time on the day not honored. Shareable must be false. | If email is provided, Latch will email the doorcode. If phone is provided, Latch will text the doorcode. |
+| DAILY_SINGLE_USE | Doorcode           | 7 digit doorcode that works for the entire calendar day set to the timezone of the device, but expires 15 minutes after first use. End time from request is not used. | Either email or phone required. Start time must be either on the day of the request or the next day. No start time further in advance will be allowed. Shareable must be false.                                          | If email is provided, Latch will email the doorcode. If phone is provided, Latch will text the doorcode. |
+
 1. If the request was successful, the Partner BE will receive an HTTP 200 with the following fields:
 
 	* `userUuid`: Unique identifier of the invited user and the list of doors the user has access to:
@@ -208,7 +218,7 @@ Partners can invite users, without the need of creating them ahead of time, and 
 
 	In case of an error, the API will return the following error responses:
 	
-	* `400 Bad Request`: missing parameters or invalid door UUIDs.
+	* `400 Bad Request`: missing/invalid parameters or invalid door UUIDs.
 
 		⇒ Check all the parameters are correct and check all the given doors are valid.
 
@@ -302,7 +312,8 @@ Partners can fetch a single user. This will be done by using a partner-scoped to
            "granter": {
              "type": "<string>",
              "uuid": "<string>",
-           }
+           },
+           "role": "<string>" 
          },
          ...
        ]
