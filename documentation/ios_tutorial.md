@@ -13,14 +13,14 @@ The iOS SDK allows you to initialize and unlock a Latch-supported lock.
 
 Async/Await
 
-```
+```swift
 let token = ... // fetched from Auth0
 let latch = try await Latch.initialize(withToken: token)
 ```
 
 Completion Block
 
-```
+```swift
 let token = ... // fetched from Auth0
 Latch.initialize(withToken: token) { result in
   switch result {
@@ -36,15 +36,15 @@ Latch.initialize(withToken: token) { result in
 
 Async/Await
 
-```
+```swift
 let locks = await latch.locks()
 ```
 
 Completion Block
 
-```
+```swift
 latch.locks { locks in
-...
+  ...
 }
 ```
 
@@ -52,14 +52,14 @@ latch.locks { locks in
 
 Async/Await
 
-```
+```swift
 try await latch.unlock(lockID: lock.id.uuidString)
 ```
 
 Completion Block
 
-```
-latch.unlock(lock) { result in
+```swift
+latch.unlock(lockID: lock.id.uuidString) { result in
   switch result {
   case .success:
     ...
@@ -71,7 +71,7 @@ latch.unlock(lock) { result in
 
 ## Proximity Unlock
 
-```
+```swift
 latch.proximityUnlockHandler = { unlock in
   print("Unlock Status: \(unlock.lockID) \(unlock.status)")
 }
@@ -80,6 +80,23 @@ latch.startProximityUnlock()
 latch.stopProximityUnlock()
 ```
 
+## Sync
 
+Async/Await
 
+```swift
+try await latch.sync(lockID: lock.id.uuidString)
+```
 
+Completion Block
+
+```swift
+latch.sync(lockID: lock.id.uuidString) { result in
+  switch result {
+  case .success:
+    ...
+  case .failure(let error)
+    ...
+  }
+}
+```
