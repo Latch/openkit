@@ -175,6 +175,22 @@ LatchClient
     }
 ```
 
+## Sync
 
+Sync allows your mobile client to act as a bridge to Latch backend for uplink and downlink data requests including battery, timestamp, activity logs, and engineering logs. In times of troubleshooting, a sync is recommended to either resolve the issue or provide Latch with full information around the issue.
 
+Similar to `unlock()`, with the locks retrieved from `LocksResult.Success.locks`, we can now call `sync()` to perform sync on a Latch lock.
 
+```
+LatchClient
+  .sync(lock.uuid)
+  .subscribe
+  { syncResult ->
+    when(syncResult) {
+      SyncResult.Success -> //lock sync is success!
+      //(handle other cases...)
+    }
+  }
+```
+
+Your Latch lock is synced now!
