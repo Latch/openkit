@@ -82,6 +82,8 @@ latch.stopProximityUnlock()
 
 ## Sync
 
+Sync allows your mobile client to act as a bridge to Latch backend for uplink and downlink data requests including battery, timestamp, activity logs, and engineering logs. In times of troubleshooting, a sync is recommended to either resolve the issue or provide Latch with full information around the issue.
+
 Async/Await
 
 ```swift
