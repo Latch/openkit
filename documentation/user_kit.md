@@ -23,6 +23,13 @@ Partners can fetch a list of all the doors that are enabled for them, by using a
 	GET https://rest.latchaccess.com/access/sdk/v1/doors
 	```
 
+	HTTP Query Parameters
+
+	```
+	pageSize: <integer>   (by default returns all doors)
+	pageToken: "<string>" (default is "1", first page)
+	```
+
 	HTTP Headers
 	
 	```
