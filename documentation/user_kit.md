@@ -23,6 +23,13 @@ Partners can fetch a list of all the doors that are enabled for them, by using a
 	GET https://rest.latchaccess.com/access/sdk/v1/doors
 	```
 
+	HTTP Query Parameters
+
+	```
+	pageSize: <integer>   (by default returns all doors)
+	pageToken: "<string>" (default is "1", first page)
+	```
+
 	HTTP Headers
 	
 	```
@@ -47,7 +54,8 @@ Partners can fetch a list of all the doors that are enabled for them, by using a
 	        "buildingUuid": "<string>"
 	      },
 	      ...
-	    ]
+	    ],
+		"nextPageToken": "<string>"
 	}
 	```
 
@@ -59,6 +67,7 @@ Partners can fetch a list of all the doors that are enabled for them, by using a
 	  * `name`: Name of the door.
 	  * `type`: Type of door. Possible values: "DOOR" or "ELEVATOR".
 	  * `buildingUuid`: Unique-identifier of the building where the door is located.
+	* `nextPageToken`: Token to fetch the next page. Expected value is `null` when there is no next page.
 
 	In case of an error, the API will return the following error responses:
 	
@@ -139,6 +148,7 @@ Partners can fetch a list of their Users. This will be done by using a partner-s
 	* `lastName`: Last name of the user.
 	* `userUuid`: Unique identifier of the user.
 	* `accesses`: List of doors the user has access to.
+	* `nextPageToken`: Token to fetch the next page. Expected value is `null` when there is no next page.
 
 	In case of an error, the API will return the following error responses:
 	
