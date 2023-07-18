@@ -209,6 +209,13 @@ Partners can invite users, without the need of creating them ahead of time, and 
 | DAILY            | Doorcode           | 7 digit doorcode that works for the entire calendar day set to the timezone of the device.End time from request is not used.                                          | Either email or phone required (not both). Start time must be either on the day of the request or the next day. No start time further in advance will be allowed. Exact start time on the day not honored. Shareable must be false. | If email is provided, Latch will email the doorcode. If phone is provided, Latch will text the doorcode unless an existing User is found with a matching phone number. If a User with that phone number is found and has an email address, Latch will send an email not a text. |
 | DAILY_SINGLE_USE | Doorcode           | 7 digit doorcode that works for the entire calendar day set to the timezone of the device, but expires 15 minutes after first use. End time from request is not used. | Either email or phone required (not both). Start time must be either on the day of the request or the next day. No start time further in advance will be allowed. Shareable must be false.                                          | If email is provided, Latch will email the doorcode. If phone is provided, Latch will text the doorcode unless an existing User is found with a matching phone number. If a User with that phone number is found and has an email address, Latch will send an email not a text. |
 
+Note that the `role` in the request does not bear relevance on the validation.
+The `role` field allows clients to classify their understanding of a User's role with respect to a certain Door, but does not imply a certain credential type or shareability.
+We currently support two `role`'s: `RESIDENT` and `NON_RESIDENT`.
+
+In the future though, the `role` could be used to determine what credential details the Partner Backend has the ability to see.
+For example, a Partner Backend can see credential details for their own `NON_RESIDENT`'s but not for `RESIDENT`'s as that would be a privacy violation.
+
 1. If the request was successful, the Partner BE will receive an HTTP 200 with the following fields:
 
 	* `userUuid`: Unique identifier of the invited user and the list of doors the user has access to:
