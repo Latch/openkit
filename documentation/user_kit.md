@@ -45,20 +45,20 @@ Partners can fetch a list of all the doors that are enabled for them, by using a
 	HTTP Response Body
 	
 	```
-	{
-	    "doors": [
-	      {
-	        "uuid": "<string>",
-	        "name": "<string>",
-	        "type": "DOOR" | "ELEVATOR",
-	        "buildingUuid": "<string>",
-			"accessibilityType": "COMMUNAL" | "PRIVATE",
-			"isConnected": <boolean>
-	      },
-	      ...
-	    ],
-		"nextPageToken": "<string>"
-	}
+    {
+      "doors": [
+        {
+            "uuid": "<string>",
+            "name": "<string>",
+            "type": "DOOR" | "ELEVATOR",
+            "buildingUuid": "<string>",
+            "accessibilityType": "COMMUNAL | "PRIVATE",
+            "isConnected": <boolean>
+        },
+        ...
+      ],
+      "nextPageToken": "<string>"
+    }
 	```
 
 
