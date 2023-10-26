@@ -44,7 +44,7 @@ Partners can fetch a list of all the doors that are enabled for them, by using a
 
 	HTTP Response Body
 	
-	```
+    ```
     {
       "doors": [
         {
@@ -59,7 +59,7 @@ Partners can fetch a list of all the doors that are enabled for them, by using a
       ],
       "nextPageToken": "<string>"
     }
-	```
+    ```
 
 
 1. If the request was successful, the Partner BE will receive an HTTP 200 with the following fields:
