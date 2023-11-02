@@ -55,7 +55,6 @@ It is possible to filter results by Building UUID.
             "type": "DOOR" | "ELEVATOR",
             "buildingUuid": "<string>",
             "accessibilityType": "COMMUNAL | "PRIVATE",
-            "isConnected": <boolean>
         },
         ...
       ],
@@ -72,7 +71,6 @@ It is possible to filter results by Building UUID.
 	  * `type`: Type of door. Possible values: "DOOR" or "ELEVATOR".
 	  * `buildingUuid`: Unique-identifier of the building where the door is located.
 	  * `accessibilityType`: Indicates whether its a communal (entrance, amenities, etc.) or private door (e.g. unit)
-	  * `isConnected`: Indicates connection status of the door. If internet or hub connected, field is set to `true`.
 	* `nextPageToken`: Token to fetch the next page. Expected value is `null` when there is no next page.
 
 	In case of an error, the API will return the following error responses:
