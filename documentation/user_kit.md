@@ -16,6 +16,7 @@ After selecting a door, the property manager will select the partner from the dr
 ## Doors API
 
 Partners can fetch a list of all the doors that are enabled for them, by using a partner-scoped token from the BE.
+It is possible to filter results by Building UUID.
 
 1. GET request from the Partner BE to the Latch BE with an empty body request
 
@@ -28,6 +29,7 @@ Partners can fetch a list of all the doors that are enabled for them, by using a
 	```
 	pageSize: <integer>   (by default returns all doors)
 	pageToken: "<string>" (default is "1", first page)
+	buildingUuid: "<string>" (for filtering results by the Building UUID)
 	```
 
 	HTTP Headers
