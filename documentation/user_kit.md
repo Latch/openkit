@@ -180,24 +180,25 @@ Partners can invite users, without the need of creating them ahead of time, and 
 	```
 
 	HTTP Request Body
-	
-	```
-	{
-	    "firstName": "<string>",
-	    "lastName": "<string>",
-	    "email": "<string>",
-	    "phone": "<string>",
-	    "startTime": "<datetime>",  // e.g. "2022-09-30T15:11:02.537Z"
-	    "endTime": "<datetime>",    // e.g. "2022-09-30T15:11:02.537Z"
-	    "doorUuids": [
-	      "<string>",
-	      ...
-	    ],
-	    "shareable": <boolean>,
-	    "passcodeType": "PERMANENT" | "DAILY" | "DAILY_SINGLE_USE",
-	    "role": "RESIDENT" | "NON_RESIDENT"
-	}
-	```
+
+   ```
+   {
+       "firstName": "<string>",
+       "lastName": "<string>",
+       "email": "<string>",
+       "phone": "<string>",
+       "startTime": "<datetime>",  // e.g. "2022-09-30T15:11:02.537Z"
+       "endTime": "<datetime>",    // e.g. "2022-09-30T15:11:02.537Z"
+       "doorUuids": [
+         "<string>",
+         ...
+       ],
+       "shareable": <boolean>,
+       "passcodeType": "PERMANENT" | "DAILY" | "DAILY_SINGLE_USE",
+       "role": "RESIDENT" | "NON_RESIDENT",
+       "shouldNotify": <boolean>
+   }
+   ```
 	
 	HTTP Response Body
 	
@@ -213,7 +214,7 @@ Partners can invite users, without the need of creating them ahead of time, and 
 	}
 	```
 
-   Validation
+#### Validation
 
 | Passcode Type    | Type of Credential | Credential Details                                                                                                                                                    | Validation Notes                                                                                                                                                                                                                    | Downstream Notifications                                                                                                                                                                                                                                                        |
 |------------------|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -227,6 +228,18 @@ We currently support two `role`'s: `RESIDENT` and `NON_RESIDENT`.
 
 In the future though, the `role` could be used to determine what credential details the Partner Backend has the ability to see.
 For example, a Partner Backend can see credential details for their own `NON_RESIDENT`'s but not for `RESIDENT`'s as that would be a privacy violation.
+
+####  Field descriptions
+
+- `shouldNotify` (default `true`): controls whenever email notifications are sent to the invited user. The emails 
+include the welcome email and/or the Doorcode email. If set to `false` **no** emails are sent. In order to prevent
+invalid scenarios validations are put in place to prevent the following request situation since it would lead to the
+user having no way of accessing his Doorcode:
+  - `shouldNotify`: `false`
+  - `passcodeType`: `DAILY` or `DAILY_SINGLE_USE`
+  - `role`: `RESIDENT`
+
+#### Results
 
 1. If the request was successful, the Partner BE will receive an HTTP 200 with the following fields:
 
