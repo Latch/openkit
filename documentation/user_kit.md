@@ -234,7 +234,7 @@ For example, a Partner Backend can see credential details for their own `NON_RES
 - `shouldNotify` (default `true`): controls whenever email notifications are sent to the invited user. The emails 
 include the welcome email and/or the Doorcode email. If set to `false` **no** emails are sent. In order to prevent
 invalid scenarios validations are put in place to prevent the following request situation since it would lead to the
-user having no way of accessing his Doorcode:
+user having no way of accessing their Doorcode:
   - `shouldNotify`: `false`
   - `passcodeType`: `DAILY` or `DAILY_SINGLE_USE`
   - `role`: `RESIDENT`
