@@ -46,20 +46,21 @@ It is possible to filter results by Building UUID.
 
 	HTTP Response Body
 	
-	```
-	{
-	    "doors": [
-	      {
-	        "uuid": "<string>",
-	        "name": "<string>",
-	        "type": "DOOR" | "ELEVATOR",
-	        "buildingUuid": "<string>"
-	      },
-	      ...
-	    ],
-		"nextPageToken": "<string>"
-	}
-	```
+    ```
+    {
+      "doors": [
+        {
+            "uuid": "<string>",
+            "name": "<string>",
+            "type": "DOOR" | "ELEVATOR",
+            "buildingUuid": "<string>",
+            "accessibilityType": "COMMUNAL | "PRIVATE",
+        },
+        ...
+      ],
+      "nextPageToken": "<string>"
+    }
+    ```
 
 
 1. If the request was successful, the Partner BE will receive an HTTP 200 with the following fields:
@@ -69,6 +70,7 @@ It is possible to filter results by Building UUID.
 	  * `name`: Name of the door.
 	  * `type`: Type of door. Possible values: "DOOR" or "ELEVATOR".
 	  * `buildingUuid`: Unique-identifier of the building where the door is located.
+	  * `accessibilityType`: Indicates whether its a communal (entrance, amenities, etc.) or private door (e.g. unit)
 	* `nextPageToken`: Token to fetch the next page. Expected value is `null` when there is no next page.
 
 	In case of an error, the API will return the following error responses:
