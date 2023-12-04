@@ -6,4 +6,4 @@
 
 ## Contact
 
-For inquiries or questions, please reach out to [partners@latch.com](mailto:partners@latch.com)
+For inquiries or questions, please reach out to [integrations@latch.com](mailto:integrations@latch.com)
