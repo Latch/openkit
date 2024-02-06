@@ -8,6 +8,7 @@
 1. [System Flow](system_flow.md)
 1. [Partner Backend](partner_backend.md)
 1. [User Kit](user_kit.md)
+1. [User Kit v2](user_kit_v2.md)
 1. [Partner App](partner_app.md)
 1. [Environments](environments.md)
 1. [Logging, Metrics, and Diagnostics](logging_metrics.md)
