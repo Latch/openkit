@@ -276,7 +276,7 @@ user having no way of accessing their Doorcode:
 	* `400 Bad Request`: missing/invalid parameters or invalid door UUIDs.
 
 		⇒ Check all the parameters are correct and check all the given doors are valid.
-    ⇒ Ensure at least 1 doorUuid is supplied in the request.
+        ⇒ Ensure at least 1 doorUuid is supplied in the request.
 
 	* `401 Unauthorized`: missing or invalid access token.
 
