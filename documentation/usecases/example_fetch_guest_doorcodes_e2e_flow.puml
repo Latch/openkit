@@ -1,0 +1,237 @@
+@startuml
+' plantuml sequence diagram syntax https://plantuml.com/sequence-diagram
+' builtin icons are at https://plantuml.com/openiconic
+
+participant "<size:24><&person></size>Property Manager" as pm
+participant "<size:24><&cloud></size>Partner Backend" as pbe
+participant "<size:24><&laptop></size>Mission Control" as mc
+participant "<size:24><&cloud></size>Latch Backend" as lbe
+participant "<size:24><&cloud></size>Auth0" as auth0
+title OpenKit end-to-end flow to fetch Guest Doorcodes
+
+... <size:16><b>Setup doors in Mission Control ...
+pm -> mc: Enable doors for partner eligible to be used in APIs
+mc -> pm
+
+
+... <size:16><b>Get partner-scoped token to make API requests ...
+pbe -> lbe: POST/v1/oauth/token
+note right
+{
+  "client_id": "{{ m2m_client_id }}",
+  "client_secret": "{{ m2m_client_secret }}",
+  "audience": "{{ audience }}",
+  "grant_type": "client_credentials"
+}
+end note
+lbe -> auth0: Gets token from Auth0 for m2m client application
+auth0 -> lbe
+lbe -> pbe
+note left
+{
+    "access_token": "<string>",
+    "expires_in": <int>,
+    "token_type": "Bearer"
+}
+end note
+
+
+... <size:16><b>Get doors enabled for partner ...
+pbe -> lbe: GET /access/sdk/v1/doors
+lbe -> pbe
+note left
+{
+  "doors": [
+    {
+      "uuid": "<string>",
+      "name": "<string>",
+      "type": "DOOR" | "ELEVATOR",
+      "buildingUuid": "<string>",
+      **"accessibilityType": "COMMUNAL" | "PRIVATE",**
+      **"isConnected": <boolean>,**
+    }
+  ],
+  "nextPageToken": "<string>"
+}
+end note
+
+
+... <size:16><b>Possible requests to create guests, grant access to doors, and get doorcodes ...
+pbe -> pbe: Filter for connected and/or non-connected doors
+
+... <size:12><b>Option 1: Create DAILY access to connected and/or non-connected doors ...
+pbe -> lbe: POST /access/sdk/v2/users
+note right
+{
+    "firstName": "<string>",
+    "lastName": "<string>",
+    "email": "<string>",
+    "phone": "<string>",
+    "startTime": "<datetime>",
+    "endTime": "<datetime>",
+    "doorUuids": [
+      "<non-connected-door-1>",
+      "<non-connected-door-2>"
+      "<connected-door-1>"
+      ...
+    ],
+    **"shareable": false,**
+    **"passcodeType": "DAILY",**
+    **"role": "NON_RESIDENT",**
+    "shouldNotify": <boolean>
+}
+end note
+lbe -> pbe
+note left
+{
+  "email": "<string>",
+  "firstName": "<string>",
+  "lastName": "<string>",
+  "phone": "<string>",
+  "userUuid": "<string>",
+  "accesses": [
+    {
+      "doorUuid": "<non-connected-door-1>",
+      **"passcodeType": "DAILY",**
+      **"role": "NON_RESIDENT",**
+      **"shareable": false,**
+      **"doorcode": {**
+        **"code": "<string>",     // i.e. "1234567"**
+        **"description": "<string>"**
+      **},**
+      "endTime": "<datetime>",
+      "granter": {
+        "type": "PARTNER",
+        "uuid": "<string>"
+      },
+      "startTime": "<string>",
+      "userUuid": "<string>"
+    },
+    ...
+  ]
+}
+end note
+
+... <size:12><b>Option 2: Create DAILY_SINGLE_USE access to connected and/or non-connected doors ...
+pbe -> lbe: POST /access/sdk/v2/users
+note right
+{
+    "firstName": "<string>",
+    "lastName": "<string>",
+    "email": "<string>",
+    "phone": "<string>",
+    "startTime": "<datetime>",
+    "endTime": "<datetime>",
+    "doorUuids": [
+      "<non-connected-door-1>",
+      "<non-connected-door-2>"
+      "<connected-door-1>"
+      ...
+    ],
+    **"shareable": false,**
+    **"passcodeType": "DAILY_SINGLE_USE",**
+    **"role": "NON_RESIDENT",**
+    "shouldNotify": <boolean>
+}
+end note
+lbe -> pbe
+note left
+{
+  "email": "<string>",
+  "firstName": "<string>",
+  "lastName": "<string>",
+  "phone": "<string>",
+  "userUuid": "<string>",
+  "accesses": [
+    {
+      "doorUuid": "<non-connected-door-1>",
+      **"passcodeType": "DAILY_SINGLE_USE",**
+      **"role": "NON_RESIDENT",**
+      **"shareable": false,**
+      **"doorcode": {**
+        **"code": "<string>",     // i.e. "1234567"**
+        **"description": "<string>"**
+      **},**
+      "endTime": "<datetime>",
+      "granter": {
+        "type": "PARTNER",
+        "uuid": "<string>"
+      },
+      "startTime": "<string>",
+      "userUuid": "<string>"
+    },
+    ...
+  ]
+}
+end note
+
+... <size:12><b>Option 3: Create PERMANENT access to connected doors ...
+pbe -> lbe: POST /access/sdk/v2/users
+note right
+{
+    "firstName": "<string>",
+    "lastName": "<string>",
+    "email": "<string>",
+    "phone": "<string>",
+    "startTime": "<datetime>",
+    "endTime": "<datetime>",
+    "doorUuids": [
+      "<connected-door-1>"
+      "<connected-door-2>"
+      ...
+    ],
+    **"shareable": false,**
+    **"passcodeType": "PERMANENT",**
+    **"role": "NON_RESIDENT",**
+    "shouldNotify": <boolean>
+}
+end note
+lbe -> pbe
+note left
+{
+  "email": "<string>",
+  "firstName": "<string>",
+  "lastName": "<string>",
+  "phone": "<string>",
+  "userUuid": "<string>",
+  "accesses": [
+    {
+      "doorUuid": "<connected-door-1>",
+      **"passcodeType": "PERMANENT",**
+      **"role": "NON_RESIDENT",**
+      **"shareable": false,**
+      **"doorcode": {**
+        **"code": "<string>",     // i.e. "1234567"**
+        **"description": "<string>"**
+      **},**
+      "endTime": "<datetime>",
+      "granter": {
+        "type": "PARTNER",
+        "uuid": "<string>"
+      },
+      "startTime": "<string>",
+      "userUuid": "<string>"
+    },
+    ...
+  ]
+}
+end note
+
+... <size:16><b>Revoke access for PERMANENT access type ...
+pbe -> lbe: DELETE /access/sdk/v1/users/:userUuid/doors/:doorUuid
+lbe -> pbe
+
+... <size:16><b>Get user, their accesses and doorcodes ...
+pbe -> lbe: GET /access/sdk/v1/users/:userUuid
+lbe -> pbe
+note left
+// same response as POST /v2/users
+end note
+
+... <size:16><b>Get all users, their accesses and doorcodes ...
+pbe -> lbe: GET /access/sdk/v1/users
+lbe -> pbe
+note left
+// similar to POST /v2/users response but returns list
+end note
+@enduml
