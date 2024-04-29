@@ -13,6 +13,5 @@
 1. [Environments](environments.md)
 1. [Logging, Metrics, and Diagnostics](logging_metrics.md)
 1. [Release Schedule](release_schedule.md)
-1. [Upcoming Features](upcoming_features.md)
 1. [iOS Tutorial](ios_tutorial.md)
 1. [Android Tutorial](android_tutorial.md)
