@@ -559,7 +559,11 @@ Partners can fetch a list of their Buildings. This will be done by using a partn
               "city": "<string>",
               "country": "<string>",
               "postalCode": "<string>",
-              "state": "<string>"
+              "state": "<string>",
+              "portfolio": {
+                "uuid": "<string>",
+                "name": "<string>"
+              }
             }
          },
          ...
@@ -574,6 +578,7 @@ Partners can fetch a list of their Buildings. This will be done by using a partn
         * `uuid`: Unique-identifier of the building.
         * `name`: Name of the building.
         * `address`: Location the building is located.
+        * `portfolio`: Includes the name and uuid of the portfolio the building is part of.
 
    In case of an error, the API will return the following error responses:
 
