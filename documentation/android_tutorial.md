@@ -177,9 +177,9 @@ LatchClient
 
 ## Sync
 
-Sync allows your mobile client to act as a bridge to Latch backend for uplink and downlink data requests including battery, timestamp, activity logs, and engineering logs. In times of troubleshooting, a sync is recommended to either resolve the issue or provide Latch with full information around the issue.
+Sync allows your mobile client to act as a bridge to the Latch backend for uplink and downlink data requests, including battery, timestamp, activity logs, and engineering logs. In times of troubleshooting, a sync is recommended to either resolve the issue or provide Latch with full information around the issue.
 
-Similar to `unlock()`, with the locks retrieved from `LocksResult.Success.locks`, we can now call `sync()` to perform sync on a Latch lock.
+After each unlock, the SDK will passively sync data with the Latch ecosystem to keep user data as up to date as possible. Explicitly calling `.sync()` will initiate a longer sync operation that attempts to sync all critical data, including the data synced after unlock, along with non-critical data. The `.sync()` operation takes about 10 seconds on average and will cancel any passive sync operations initiated after the unlock operation.
 
 ```
 LatchClient
