@@ -563,7 +563,8 @@ Partners can fetch a list of their Buildings. This will be done by using a partn
               "portfolio": {
                 "uuid": "<string>",
                 "name": "<string>"
-              }
+              },
+              "timezone": "<string>"
             }
          },
          ...
@@ -579,6 +580,7 @@ Partners can fetch a list of their Buildings. This will be done by using a partn
         * `name`: Name of the building.
         * `address`: Location the building is located.
         * `portfolio`: Includes the name and uuid of the portfolio the building is part of.
+        * `timezone`: Timezone the building is in. Format is "Area/Location" (e.g. "America/New_York") based on the TZ identifier from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.
 
    In case of an error, the API will return the following error responses:
 
