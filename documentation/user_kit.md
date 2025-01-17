@@ -55,7 +55,15 @@ It is possible to filter results by Building UUID.
             "type": "DOOR" | "ELEVATOR",
             "buildingUuid": "<string>",
             "accessibilityType": "COMMUNAL | "PRIVATE",
-            "isConnected": <boolean>
+            "isConnected": <boolean>,
+            "device": {
+                "serialNumber": "<string>",
+                "type": "<string>",
+                "battery": {
+                    "percentage": <int32>,
+                    "lastUpdated": <int64>
+                }
+            }
         },
         ...
       ],
@@ -73,6 +81,12 @@ It is possible to filter results by Building UUID.
       * `buildingUuid`: Unique-identifier of the building where the door is located.
       * `accessibilityType`: Indicates whether its a communal (entrance, amenities, etc.) or private door (e.g. unit)
       * `isConnected`: Indicates connection status of the door. If internet or hub connected, field is set to `true`.
+      * `device`: Includes additional metadata about the physical lock device. **If null, it indicates the door is not yet activated.**
+        * `serialNumber`: Serial number of the device.
+        * `type`: Type of device. Possible values: 'M', 'R', 'R2', 'C', 'G'
+        * `battery`: Battery information with the following fields:
+          * `percentage`: Estimated percentage of battery left on the device.
+          * `lastUpdated`: Indicates the last time the battery percentage was updated.
 	* `nextPageToken`: Token to fetch the next page. Expected value is `null` when there is no next page.
 
 	In case of an error, the API will return the following error responses:
