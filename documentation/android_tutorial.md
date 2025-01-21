@@ -27,7 +27,7 @@ In your **application module’s** build.gradle file. Declare latch-sdk as a dep
 
 ```
 dependencies {
-  implementation('com.latch:sdk:0.6.0')
+  implementation('com.latch:sdk:1.0.3')
   //(...)
 }
 ```
@@ -44,33 +44,23 @@ The Latch SDK uses RxJava to perform actions asynchronously. Each of the functio
 Note that `context` here must not be the `applicationContext`.
 
 ```
-LatchClient
-  .initialize(context, token)
-  .subscribe
-    { initResult ->
-      when(initResult) {
-        InitResult.Success  -> //SDK is successfully initialized
-        //(handle other cases...)
-      }
+// Initialize with lock inclusion preference
+LatchClient.initialize(context, includeAllLocks = true)
+
+// Set up with token
+LatchClient.setupWithToken(token, includeAllLocks = true)
+  .subscribe { setupResult ->
+    when(setupResult) {
+      SetupResult.Success -> // SDK ready
+      SetupResult.InvalidToken -> // Handle token issues
+      // Handle other cases
     }
+  }
 ```
 
-Each of the SDK functions provides a Kotlin sealed class as the result. We strongly recommend using exhaustive-when to catch all possible variables of a function call.
-
-If you have previously supplied the SDK with a valid token, you can also initialize the SDK without the token.
-
-```
-LatchClient
-  .initialize(context, token)
-  .subscribe
-    { initResult ->
-      when(initResult) {
-        InitResult.Success  -> //SDK is successfully initialized
-        InitResult.InvalidToken  -> //Previously persisted token is expired 
-        //(handle other cases...)
-      }
-    }
-```
+The `includeAllLocks` parameter determines whether to show:
+- `true`: All locks that user can access (partner and non-partner)
+- `false`: Only partner-managed locks
 
 ### View the locks and select one to unlock
 
@@ -194,3 +184,51 @@ LatchClient
 ```
 
 Your Latch lock is synced now!
+
+## Access logs
+Retrieve access logs for a lock.
+
+```
+LatchClient.accessLogs(lockUuid)
+  .subscribe
+  { accessLogsResult ->
+    when(accessLogsResult) {
+      is AccessLogsResult.Success -> {
+        // Access logs are available under accessLogsResult.accessLogs
+      }
+      //(handle other cases...)
+    }
+  }
+```
+
+### Guest Access
+Invite guests
+
+```
+LatchClient.inviteGuests(
+  firstName = "John",
+  lastName = "Doe",
+  email = "john@example.com",
+  phone = "+1234567890",
+  startTime = LocalDateTime.now(),
+  endTime = null, // No expiration
+  deviceUuids = listOf(lockUUID.toString()),
+  passcodeType = PasscodeType.PERMANENT
+).subscribe { inviteResult ->
+  // Handle invitation result
+}
+```
+
+Retrieve guest list
+
+```
+LatchClient.guests()
+  .subscribe { guestsResult ->
+    when(guestsResult) {
+      is GuestsResult.Success -> {
+        val guestList = guestsResult.guests
+      }
+      // Handle error cases
+    }
+  }
+```
