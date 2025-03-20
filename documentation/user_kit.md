@@ -609,7 +609,7 @@ Partners can fetch a list of their Buildings. This will be done by using a partn
 
 ### Get building residents
 
-Partners can fetch a list of residents in a building that have active accesses. This will be done by using a partner-scoped token from the BE.
+Partners can fetch a list of users in a building that are residents with active accesses. This will be done by using a partner-scoped token from the BE.
 
 1. GET residents request from the Partner BE to the Latch BE
 
