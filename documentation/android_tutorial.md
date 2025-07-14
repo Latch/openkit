@@ -1,6 +1,6 @@
 # Android Tutorial
 
-The Android SDK allows you to initialize and unlock a Latch-supported lock. This tutorial corresponds with version 0.6.0 of the SDK.
+The Android SDK allows you to initialize and unlock a Latch-supported lock. This tutorial corresponds with version 1.4.0 of the SDK.
 
 ## Setup
 
@@ -21,13 +21,13 @@ repositories {
 }
 ```
 
-Note that we will be delivering the SDK as a zipped artifact during beta. The entire decompressed folder needs to be held at `[your/path/to/sdk]` described above. For example, the current folder structure for version 0.6.0 is `com/latch/sdk/0.6.0`.
+Note that we will be delivering the SDK as a zipped artifact during beta. The entire decompressed folder needs to be held at `[your/path/to/sdk]` described above. For example, the current folder structure for version 1.4.0 is `com/latch/sdk/1.4.0`.
 
 In your **application module’s** build.gradle file. Declare latch-sdk as a dependency.
 
 ```
 dependencies {
-  implementation('com.latch:sdk:1.0.3')
+  implementation('com.latch:sdk:1.4.0')
   //(...)
 }
 ```
