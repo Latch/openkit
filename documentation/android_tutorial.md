@@ -27,7 +27,7 @@ In your **application module’s** build.gradle file. Declare latch-sdk as a dep
 
 ```
 dependencies {
-  implementation('com.latch:sdk:1.4.0')
+  implementation('com.latch:sdk:1.5.0')
   //(...)
 }
 ```
@@ -64,11 +64,34 @@ The `includeAllLocks` parameter determines whether to show:
 
 ### View the locks and select one to unlock
 
-Similar to `initialize()`, `locks()` is also a Single providing the results asynchronously.
+Both `locks()` and `fetchLocks()` return a `Single` that provides results asynchronously.  
+
+- `locks()` — Returns the cached list of locks retrieved during initialization. This works even if the device is offline.  
+- `fetchLocks()` — Forces a refresh by calling the server. If the device is offline or the request fails, it returns an error.  
+
+When `fetchLocks()` succeeds, the cache is updated, and subsequent calls to `locks()` will return the refreshed list.  
+
+**Usage guidelines:**  
+- Use `locks()` when you want a quick response or need to support offline access.  
+- Use `fetchLocks()` when you need the latest state from the server.
 
 ```
 LatchClient
   .locks()
+  .subscribe
+    { locksResult ->
+      when(locksResult) {
+        is LocksResult.Success -> {
+          //Latch locks are available under locksResult.locks
+        }
+        //(handle other cases...)
+      }
+    }
+```
+
+```
+LatchClient
+  .fetchLocks()
   .subscribe
     { locksResult ->
       when(locksResult) {
