@@ -66,6 +66,10 @@ Latch.initialize(withToken: token) { ... }
 ```
 
 ## Doors and Locks
+The list of locks can be retrieved from local cache using `locks()` or fetched from server using fetchLocks()`
+
+`locks()` returns the cached list of locks retrieved during initialization. This works even if the device is offline.  
+Use `locks()` when you want a quick response or need to support offline access.  
 
 Async/Await
 
@@ -79,6 +83,15 @@ Completion Block
 latch.locks { locks in
   ...
 }
+```
+
+`fetchLocks()` forces a refresh by calling the server. If the device is offline or the request fails, it throws FetchLocksError error.  
+When `fetchLocks()` succeeds, the cache is updated, and subsequent calls to `locks()` will return the refreshed list.  
+It was introduced in version 1.5.0
+
+```swift
+
+let locks = try await latch.fetchLocks()
 ```
 
 ## Unlock
