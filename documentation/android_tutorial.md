@@ -162,7 +162,7 @@ LatchClient
   .startProximityUnlock() // Starts Proximity Unlock
 
 LatchClient
-  .stopProximityUnlock()  // Stops Proximity Unlock and dispose the listener
+  .stopProximityUnlock()  // Stops Proximity Unlock and dispose of the listener
 
 LatchClient
   .proximityUnlockListener()  
@@ -173,7 +173,7 @@ LatchClient
   .startProximityUnlock() // Restarts proximity unlock with a new listener
 ```
 
-We also provide a one-shot proximity unlock functions, similar to `unlock()` and terminates after it unlocks the closest lock.
+We also provide one-shot proximity unlock functions, similar to `unlock()`, that terminate after unlocking the closest lock.
 
 ```
 LatchClient
