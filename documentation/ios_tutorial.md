@@ -16,7 +16,7 @@ This function takes two parameters:
 
 `token` - representing optional String value of the Auth0 token
 
-`allAccesses` - flag that indicate if we should load all accesses (partner and non-partner) of the user. (introduced in the version `1.44.0`)
+`allAccesses` - flag that indicates if we should load all accesses (partner and non-partner) of the user. (introduced in the version `1.44.0`)
 
 Async/Await
 
@@ -24,7 +24,7 @@ Async/Await
 let token: String? = ... // fetched from Auth0
 
 /* 
-Optional flag that indicate if we should load all accesses (partner and non-partner) of the user.
+Optional flag that indicates if we should load all accesses (partner and non-partner) of the user.
  - If not provided, the default value is `false` and will behave as it was previously.
  - Setting this flag to `true` will load all devices that user has access to.
 */
@@ -44,7 +44,7 @@ Completion Block
 let token = ... // fetched from Auth0
 
 /* 
-Optional flag that indicate if we should load all accesses (partner and non-partner) of the user.
+Optional flag that indicates if we should load all accesses (partner and non-partner) of the user.
  - If not provided, the default value is `false` and will behave as it was previously.
  - Setting this flag to `true` will load all devices that user has access to.
 */
@@ -66,7 +66,7 @@ Latch.initialize(withToken: token) { ... }
 ```
 
 ## Doors and Locks
-The list of locks can be retrieved from local cache using `locks()` or fetched from server using fetchLocks()`
+The list of locks can be retrieved from local cache using `locks()` or fetched from the server using `fetchLocks()`
 
 `locks()` returns the cached list of locks retrieved during initialization. This works even if the device is offline.  
 Use `locks()` when you want a quick response or need to support offline access.  
@@ -153,7 +153,7 @@ latch.sync(lockID: lock.id.uuidString) { result in
 
 ## Access Logs
 
-Access Logs are providing access logs information for a given lock.
+Access Logs provide access log information for a given lock.
 
 Async/Await
 

@@ -75,7 +75,7 @@ All additional SDK functions require that `initialize(...)` has been invoked wit
 | ----------------------------- | ----------- |
 | `LatchError.invalidToken`     | The supplied authorization token is invalid and should be refreshed. |
 | `LatchError.permissionDenied` | The current user hasn't granted the app access to use the Latch SDK. |
-| `Error`                       | An unexpected error occured |
+| `Error`                       | An unexpected error occurred |
 
 ## Doors and Locks
 
@@ -100,7 +100,7 @@ Retrieve all locks accessible to the current user. This list can be used to buil
 
 | Code    | Description |
 | ------- | ----------- |
-| `Error` | An unexpected error occured |
+| `Error` | An unexpected error occurred |
 
 ## Unlock
 
@@ -133,7 +133,7 @@ Either a success or failure.
 | `LatchError.concurrentUnlockInProgress` | Only one unlock operation is allowed at a time. |
 | `LatchError.lockNotFound`               | Failed to find a lock with a unique identifier matching the given lock ID. |
 | `LatchError.timeout`                    | Unlock failed to complete in a reasonable amount of time. |
-| `Error`                                 | An unexpected error occured | 
+| `Error`                                 | An unexpected error occurred | 
 
 
 
